@@ -19,4 +19,8 @@ public class Player : NetworkBehaviour
             _cc.Move(5 * data.direction * Runner.DeltaTime);
         } 
     }
+    public void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 }

@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/AvatarPractice.unity
+    guid: c31484f0de62af546af80c3bb8602b48
+  - enabled: 1
+    path: Assets/Scenes/GameFloor.unity
+    guid: 7cbf3cba2747ec2488617b892fc90b59
   m_configObjects: {}

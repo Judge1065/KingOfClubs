@@ -17,9 +17,9 @@ public class BasicSpawnerScript : MonoBehaviour, INetworkRunnerCallbacks
     public void OnInput(NetworkRunner runner, NetworkInput input){
         var data = new NetworkInputData();
         if (Input.GetKey(KeyCode.W))
-            data.direction += Vector3.forward;
+            data.direction += Vector3.forward;//(x camera forwards v3 x?)
         if (Input.GetKey(KeyCode.A))
-            data.direction += Vector3.left;
+            data.direction += Vector3.left;//(x camera left/right v3 z?)
         if (Input.GetKey(KeyCode.S))
             data.direction += Vector3.back;
         if (Input.GetKey(KeyCode.D))
@@ -67,7 +67,7 @@ public class BasicSpawnerScript : MonoBehaviour, INetworkRunnerCallbacks
         _runner.ProvideInput = true;
 
         // Create the NetworkSceneInfo from the current scene
-        var scene = SceneRef.FromIndex(SceneManager.GetActiveScene().buildIndex);
+        var scene = SceneRef.FromIndex(1);//SceneManager.GetActiveScene().buildIndex); (currently spawns in player at gamefloor)
         var sceneInfo = new NetworkSceneInfo();
         if (scene.IsValid)
         {

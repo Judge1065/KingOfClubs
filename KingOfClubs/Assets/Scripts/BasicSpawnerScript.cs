@@ -15,15 +15,23 @@ public class BasicSpawnerScript : MonoBehaviour, INetworkRunnerCallbacks
     public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason){ }
     public void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken) { }
     public void OnInput(NetworkRunner runner, NetworkInput input){
+
         var data = new NetworkInputData();
+
+        //movement controls
         if (Input.GetKey(KeyCode.W))
-            data.direction += Vector3.forward;//(x camera forwards v3 x?)
+            data.direction += Vector3.forward;
         if (Input.GetKey(KeyCode.A))
-            data.direction += Vector3.left;//(x camera left/right v3 z?)
-        if (Input.GetKey(KeyCode.S))
-            data.direction += Vector3.back;
+            data.direction += Vector3.left;
         if (Input.GetKey(KeyCode.D))
             data.direction += Vector3.right;
+
+        //closest player's position
+        if (Input.GetKey(KeyCode.Space))
+            data.Interacting = true;
+            //Player player = FindFirstObjectByType(Player);//GetPosition();
+            //get positions
+
         input.Set(data);
     }
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input){}

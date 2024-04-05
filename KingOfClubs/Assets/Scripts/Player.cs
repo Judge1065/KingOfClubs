@@ -7,6 +7,7 @@ public class Player : NetworkBehaviour
 {
     private NetworkCharacterController _cc;
     [SerializeField] Transform cam;
+    bool Interacting = false;
 
     private void Awake()
     {
@@ -25,14 +26,27 @@ public class Player : NetworkBehaviour
             camForward.y = 0;
             camRight.y = 0;
 
-            data.direction.z = data.direction.z * camForward.z;
-            data.direction.x = data.direction.x * camRight.x;
+            camForward.Normalize();
+            camRight.Normalize();
 
-            Debug.Log(data.direction);
+            //set direction
+            data.direction = (camForward * data.direction.z) + (camRight * data.direction.x);
 
+            //check if player wants to interact
+            Interacting = data.Interacting;
 
-            _cc.Move(5 * data.direction * Runner.DeltaTime); //(x cam v3 )
-        } 
+            //move player
+            _cc.Move(5 * data.direction * Runner.DeltaTime);
+        }
+    }
+    //if player is touching another player
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Collide");
+        if (Interacting == true && collision.gameObject.tag == "Player")
+            Debug.Log("touching");
+
+        Interacting = false;
     }
     public void Start()
     {

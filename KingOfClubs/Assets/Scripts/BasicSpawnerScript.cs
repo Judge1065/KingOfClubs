@@ -48,7 +48,8 @@ public class BasicSpawnerScript : MonoBehaviour, INetworkRunnerCallbacks
             Vector3 spawnPosition = new Vector3((player.RawEncoded % runner.Config.Simulation.PlayerCount) * 3, 1, 0);
             NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
             // Keep track of the player avatars for easy access
-            _spawnedCharacters.Add(player, networkPlayerObject);
+            _spawnedCharacters.Add(player, networkPlayerObject);//player is the PlayerRef(number representing the player), networkPlayerObject
+            //Debug.Log(_spawnedCharacters.TryGetValue());
         }
     }
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player) {
